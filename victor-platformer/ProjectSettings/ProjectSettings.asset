@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 26
-  productGUID: 30acefe4a2dc7644398951b29fd5590d
+  productGUID: bbd90bcedd8ac394db6b8a7f4d46fabc
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -702,10 +702,10 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: d02e3bdc-4ba4-4dd6-bdd7-fd72b221c588
+  cloudProjectId: fe9d71d4-8236-4f0c-a1ef-e89f4e62a127
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: victor-platformer
+  projectName: victor-platformer 2024-01-16_05-54-50
   organizationId: gjun21
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
