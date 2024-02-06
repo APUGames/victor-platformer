@@ -124,7 +124,7 @@ AnimatorStateMachine:
     m_Position: {x: 30, y: 330, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8844408016021694236}
-    m_Position: {x: -210, y: 330, z: 0}
+    m_Position: {x: -220, y: 330, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8215293001696252529}
     m_Position: {x: 290, y: 330, z: 0}
@@ -194,9 +194,6 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: run
-    m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: climb
     m_EventTreshold: 0
@@ -315,9 +312,6 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: run
-    m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: climb
     m_EventTreshold: 0
