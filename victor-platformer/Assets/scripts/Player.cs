@@ -9,10 +9,12 @@ public class Player : MonoBehaviour
     BoxCollider2D playerFeetCollider;
     Animator playerAnimator;
     float gravityScaleAtStart;
+    bool isAlive = true;
 
     [SerializeField] private float runSpeed = 5.0f;
     [SerializeField] float jumpSpeed = 5.0f;
     [SerializeField] float climbSpeed = 5.0f;
+    [SerializeField] private Vector2 deathSeq = new Vector2(25f, 25f); 
 
     // Start is called before the first frame update
     private void Start()
@@ -27,10 +29,16 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if(!isAlive)
+        {
+            return;
+        }
+
         Run();
         Jump();
-        Climb();
         FlipSprite();
+        Climb();
+        Die();
     }
 
     private void Run()
@@ -91,6 +99,17 @@ public class Player : MonoBehaviour
         bool vSpeed = Mathf.Abs(playerCharacter.velocity.y) >
         Mathf.Epsilon;
         playerAnimator.SetBool("climb", vSpeed);
+    }
+
+    private void Die()
+    {
+        if(playerBodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemy", "Hazards")))
+        {
+            playerAnimator.SetTrigger("die"); 
+            playerCharacter.velocity = deathSeq;
+
+            isAlive = false;
+        }
     }
     
 }

@@ -15,9 +15,9 @@ TagManager:
   - Ground
   - Background
   - Player
-  - 
-  - 
-  - 
+  - Enemy
+  - Hazards
+  - Pickups
   - 
   - 
   - 
@@ -41,12 +41,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Ground
+    uniqueID: 1063542507
+    locked: 0
   - name: Climbing
     uniqueID: 1610001867
+    locked: 0
+  - name: Enemy
+    uniqueID: 3989223223
     locked: 0
   - name: Player
     uniqueID: 1214003189
     locked: 0
-  - name: Ground
-    uniqueID: 1063542507
+  - name: Hazards
+    uniqueID: 324826881
+    locked: 0
+  - name: Pickups
+    uniqueID: 572400043
     locked: 0
