@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Player : MonoBehaviour
 {
     Rigidbody2D playerCharacter;
@@ -10,11 +11,12 @@ public class Player : MonoBehaviour
     Animator playerAnimator;
     float gravityScaleAtStart;
     bool isAlive = true;
-
+    private bool hasJumpedFromWall = false;  
     [SerializeField] private float runSpeed = 5.0f;
     [SerializeField] float jumpSpeed = 5.0f;
     [SerializeField] float climbSpeed = 5.0f;
-    [SerializeField] private Vector2 deathSeq = new Vector2(25f, 25f); 
+    [SerializeField] private Vector2 deathSeq = new Vector2(25f, 25f);
+    [SerializeField] private float slideSlowdownFactor = 0.5f; // Adjust as needed
 
     // Start is called before the first frame update
     private void Start()
@@ -29,7 +31,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if(!isAlive)
+        if (!isAlive)
         {
             return;
         }
@@ -39,6 +41,22 @@ public class Player : MonoBehaviour
         FlipSprite();
         Climb();
         Die();
+
+        // Check for wall collision and slow down if necessary
+        if (playerBodyCollider.IsTouchingLayers(LayerMask.GetMask("Walls")))
+        {
+            SlowDownSlide();
+            if (!hasJumpedFromWall && Input.GetButtonDown("Jump"))
+            {
+                Jump();
+                hasJumpedFromWall = true;
+            }
+        }
+        else
+        {
+            // Reset the flag when the player is not touching the wall anymore
+            hasJumpedFromWall = false;
+        }
     }
 
     private void Run()
@@ -69,7 +87,7 @@ public class Player : MonoBehaviour
 
     private void Jump()
     {
-        if(!playerFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        if(!playerFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")) && !playerBodyCollider.IsTouchingLayers(LayerMask.GetMask("Walls")))
         {
             // Will stop this function unless true
             return;
@@ -84,32 +102,39 @@ public class Player : MonoBehaviour
 
     private void Climb()
     {
-        if(!playerBodyCollider.IsTouchingLayers(LayerMask.GetMask("Climbing")))
-        {
-            playerAnimator.SetBool("climb", false);
-            playerCharacter.gravityScale = gravityScaleAtStart;
-            return;
-        }
-        // "Vertical" from Input Axes
-        float vMovement = Input.GetAxis("Vertical");
-        // X needs to remain the same and we need to change Y
-        Vector2 climbVelocity = new Vector2(playerCharacter.velocity.x, vMovement * climbSpeed);
-        playerCharacter.velocity = climbVelocity;
-        playerCharacter.gravityScale = 0.0f;
-        bool vSpeed = Mathf.Abs(playerCharacter.velocity.y) >
-        Mathf.Epsilon;
-        playerAnimator.SetBool("climb", vSpeed);
+    if
+    (!playerBodyCollider.IsTouchingLayers(LayerMask.GetMask("Climbing")))
+    {
+    playerAnimator.SetBool("climb", false);
+    return;
     }
-
+    // "Vertical" from Input Axes
+    float vMovement = Input.GetAxis("Vertical");
+    // X needs to remain the same and we need to change Y
+    Vector2 climbVelocity = new
+    Vector2(playerCharacter.velocity.x,
+    vMovement * climbSpeed);
+    playerCharacter.velocity = climbVelocity;
+    bool vSpeed = Mathf.Abs(playerCharacter.velocity.y) >
+    Mathf.Epsilon;
+    playerAnimator.SetBool("climb", vSpeed);
+    }
+    private void SlowDownSlide()
+    {
+        // Reduce player's horizontal velocity gradually
+        playerCharacter.velocity *= slideSlowdownFactor;
+    }
     private void Die()
     {
-        if(playerBodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemy", "Hazards")))
-        {
-            playerAnimator.SetTrigger("die"); 
-            playerCharacter.velocity = deathSeq;
-
-            isAlive = false;
-        }
+    if(playerBodyCollider.IsTouchingLayers(
+    LayerMask.GetMask("Enemy", "Hazards")))
+    {
+    isAlive = false;
+    playerAnimator.SetTrigger("die");
+    GetComponent<Rigidbody2D>().velocity = deathSeq;
+    FindObjectOfType<GameSession>().ProcessPlayerDeath();
     }
+    }
+
     
 }

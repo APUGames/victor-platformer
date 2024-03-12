@@ -5,11 +5,19 @@ using UnityEngine;
 public class Pickups : MonoBehaviour
 {
     [SerializeField] private AudioClip coinPickUpSFX;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //Needs a Vector 3 after the audio variable for the position that it plays from
-        AudioSource.PlayClipAtPoint(coinPickUpSFX, Camera.main.transform.position);
+        if (coinPickUpSFX != null)
+        {
+            // Use collision.gameObject.transform.position instead of Camera.main.transform.position
+            AudioSource.PlayClipAtPoint(coinPickUpSFX, collision.gameObject.transform.position);
+        }
+        else
+        {
+            Debug.LogError("Coin pick up sound effect is not assigned to the Pickups script.");
+        }
+
         Destroy(gameObject);
     }
-
 }
