@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     Animator playerAnimator;
     float gravityScaleAtStart;
     bool isAlive = true;
-    private bool hasJumpedFromWall = false;  
+    private bool hasJumpedFromWall = false;
     [SerializeField] private float runSpeed = 5.0f;
     [SerializeField] float jumpSpeed = 5.0f;
     [SerializeField] float climbSpeed = 5.0f;
@@ -76,18 +76,18 @@ public class Player : MonoBehaviour
         // If the player is moving horizontally
         bool hMovement = Mathf.Abs(playerCharacter.velocity.x) >
         Mathf.Epsilon;
-        if(hMovement)
-            {
+        if (hMovement)
+        {
             // Reverse the current scaling of the X Axis
             transform.localScale = new Vector2
             (Mathf.Sign(playerCharacter.velocity.x), 1f);
 
-            }
+        }
     }
 
     private void Jump()
     {
-        if(!playerFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")) && !playerBodyCollider.IsTouchingLayers(LayerMask.GetMask("Walls")))
+        if (!playerFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")) && !playerBodyCollider.IsTouchingLayers(LayerMask.GetMask("Walls")))
         {
             // Will stop this function unless true
             return;
@@ -95,29 +95,29 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             // Get new Y velocity based on a controllable variable
-            Vector2 jumpVelocity = new Vector2(0.0f,jumpSpeed);
+            Vector2 jumpVelocity = new Vector2(0.0f, jumpSpeed);
             playerCharacter.velocity += jumpVelocity;
         }
     }
 
     private void Climb()
     {
-    if
-    (!playerBodyCollider.IsTouchingLayers(LayerMask.GetMask("Climbing")))
-    {
-    playerAnimator.SetBool("climb", false);
-    return;
-    }
-    // "Vertical" from Input Axes
-    float vMovement = Input.GetAxis("Vertical");
-    // X needs to remain the same and we need to change Y
-    Vector2 climbVelocity = new
-    Vector2(playerCharacter.velocity.x,
-    vMovement * climbSpeed);
-    playerCharacter.velocity = climbVelocity;
-    bool vSpeed = Mathf.Abs(playerCharacter.velocity.y) >
-    Mathf.Epsilon;
-    playerAnimator.SetBool("climb", vSpeed);
+        if
+        (!playerBodyCollider.IsTouchingLayers(LayerMask.GetMask("Climbing")))
+        {
+            playerAnimator.SetBool("climb", false);
+            return;
+        }
+        // "Vertical" from Input Axes
+        float vMovement = Input.GetAxis("Vertical");
+        // X needs to remain the same and we need to change Y
+        Vector2 climbVelocity = new
+        Vector2(playerCharacter.velocity.x,
+        vMovement * climbSpeed);
+        playerCharacter.velocity = climbVelocity;
+        bool vSpeed = Mathf.Abs(playerCharacter.velocity.y) >
+        Mathf.Epsilon;
+        playerAnimator.SetBool("climb", vSpeed);
     }
     private void SlowDownSlide()
     {
@@ -126,15 +126,15 @@ public class Player : MonoBehaviour
     }
     private void Die()
     {
-    if(playerBodyCollider.IsTouchingLayers(
-    LayerMask.GetMask("Enemy", "Hazards")))
-    {
-    isAlive = false;
-    playerAnimator.SetTrigger("die");
-    GetComponent<Rigidbody2D>().velocity = deathSeq;
-    FindObjectOfType<GameSession>().ProcessPlayerDeath();
-    }
+        if (playerBodyCollider.IsTouchingLayers(
+        LayerMask.GetMask("Enemy", "Hazards")))
+        {
+            isAlive = false;
+            playerAnimator.SetTrigger("die");
+            GetComponent<Rigidbody2D>().velocity = deathSeq;
+            FindObjectOfType<GameSession>().ProcessPlayerDeath();
+        }
     }
 
-    
+
 }
