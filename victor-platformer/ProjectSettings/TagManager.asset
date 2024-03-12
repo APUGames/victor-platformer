@@ -44,6 +44,9 @@ TagManager:
   - name: Ground
     uniqueID: 1063542507
     locked: 0
+  - name: Walls
+    uniqueID: 3613284281
+    locked: 0
   - name: Climbing
     uniqueID: 1610001867
     locked: 0

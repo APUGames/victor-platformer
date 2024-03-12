@@ -4303,6 +4303,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1516651160371516030, guid: 8bfe110744d60ae4ba1128cdad3b7c46, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1516651160371516030, guid: 8bfe110744d60ae4ba1128cdad3b7c46, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2839686793548148223, guid: 8bfe110744d60ae4ba1128cdad3b7c46, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2839686793548148223, guid: 8bfe110744d60ae4ba1128cdad3b7c46, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 2839686793548148223, guid: 8bfe110744d60ae4ba1128cdad3b7c46, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
+    - target: {fileID: 2839686793548148223, guid: 8bfe110744d60ae4ba1128cdad3b7c46, type: 3}
+      propertyPath: m_ReferencePixelsPerUnit
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 6583482663988226206, guid: 8bfe110744d60ae4ba1128cdad3b7c46, type: 3}
       propertyPath: m_Name
       value: Menu
